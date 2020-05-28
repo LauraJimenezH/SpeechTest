@@ -59,6 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(
         stream => {
           // console.log($listaDeDispositivos);
+          $btnComenzarGrabacion.disabled = true;
+          $btnDetenerGrabacion.disabled = false;
 
           // Comenzar a grabar con el stream
           mediaRecorder = new MediaRecorder(stream);
@@ -85,6 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
           sysnt.speak(mensaje);
           // Cuando se detenga (haciendo click en el botón) se ejecuta esto
           mediaRecorder.addEventListener("stop", () => {
+            $btnComenzarGrabacion.disabled = false;
+            $btnDetenerGrabacion.disabled = true;
             sysnt.cancel()
             var pendingSpeech = sysnt.pending;
             console.log(sysnt);
@@ -123,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const detenerConteo = () => {
     clearInterval(idIntervalo);
     tiempoInicio = null;
-    $duracion.textContent = "";
+    $duracion.textContent = "00:00:00";
   }
 
   const detenerGrabacion = () => {

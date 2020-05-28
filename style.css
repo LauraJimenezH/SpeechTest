@@ -4,18 +4,32 @@ body {
 }
 
 button {
-    padding: 7px 15px;
-    background: #e21414;
+    padding: 8px 15px;
+    width: 110px;
+    background: #0276b3;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
+    margin-top: 15px;
 }
 
-#text-speech {
-    width: 70%;
+.content-speech {
+    width: 67%;
     text-align: justify;
     margin: 0 auto;
-    border: 2px solid lightgray;
-    padding: 35px;
-    border-radius: 5px;
+    border: 2px solid rgb(187, 183, 183);
+    padding: 15px;
+    border-radius: 10px;
+    max-height: 320px;
+    overflow: auto;
+}
+
+#duracion {
+    color: #0276b3;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+button:disabled {
+    background: gray;
 }
