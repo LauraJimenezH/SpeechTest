@@ -1,8 +1,10 @@
 
 // Esperar a que el que DOM cargue
 document.addEventListener("DOMContentLoaded", () => {
+ 
 
   $mensaje = document.querySelector("#mensaje");
+  $audioFirma = document.getElementById("firma-contrato")
   var sysnt = window.speechSynthesis;
 
 
@@ -23,6 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     $duracion = document.querySelector("#duracion"),
     $btnComenzarGrabacion = document.querySelector("#btnComenzarGrabacion"),
     $btnDetenerGrabacion = document.querySelector("#btnDetenerGrabacion");
+    $btnDetenerGrabacion.disabled = true;
+    $audioFirma.style.display = 'none';
 
   const segundosATiempo = numeroDeSegundos => {
     let horas = Math.floor(numeroDeSegundos / 60 / 60);
@@ -61,6 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
           // console.log($listaDeDispositivos);
           $btnComenzarGrabacion.disabled = true;
           $btnDetenerGrabacion.disabled = false;
+          $audioFirma.setAttribute("src", '');
+          $audioFirma.style.display = 'none';
 
           // Comenzar a grabar con el stream
           mediaRecorder = new MediaRecorder(stream);
@@ -87,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
           sysnt.speak(mensaje);
           // Cuando se detenga (haciendo click en el botón) se ejecuta esto
           mediaRecorder.addEventListener("stop", () => {
+            $audioFirma.style.display = 'block';
             $btnComenzarGrabacion.disabled = false;
             $btnDetenerGrabacion.disabled = true;
             sysnt.cancel()
@@ -99,11 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
             detenerConteo();
             // Convertir los fragmentos a un objeto binario
 
-            // const blobAudio = new Blob(fragmentosDeAudio);
+            const blobAudio = new Blob(fragmentosDeAudio);
             // console.log(blobAudio)
             // // Crear una URL o enlace para descargar
-            // const urlParaDescargar = URL.createObjectURL(blobAudio);
+            const urlParaDescargar = URL.createObjectURL(fragmentosDeAudio[0]);
             // console.log(urlParaDescargar)
+            $audioFirma.setAttribute("src", urlParaDescargar);
             // // Crear un elemento <a> invisible para descargar el audio
             // let a = document.createElement("a");
             // document.body.appendChild(a);
