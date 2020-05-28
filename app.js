@@ -1,7 +1,5 @@
 
 const init = () => {
-    var audioLau = document.getElementById('microLau');
-    console.log(audioLau);
     const tieneSoporteUserMedia = () =>
         !!(navigator.mediaDevices.getUserMedia)
 
@@ -18,11 +16,11 @@ const init = () => {
         $btnDetenerGrabacion = document.querySelector("#btnDetenerGrabacion");
 
     // Algunas funciones útiles
-    const limpiarSelect = () => {
-        for (let x = $listaDeDispositivos.options.length - 1; x >= 0; x--) {
-            $listaDeDispositivos.options.remove(x);
-        }
-    }
+    // const limpiarSelect = () => {
+    //     for (let x = $listaDeDispositivos.options.length - 1; x >= 0; x--) {
+    //         $listaDeDispositivos.options.remove(x);
+    //     }
+    // }
 
     const segundosATiempo = numeroDeSegundos => {
         let horas = Math.floor(numeroDeSegundos / 60 / 60);
@@ -42,24 +40,24 @@ const init = () => {
             $duracion.textContent = segundosATiempo((Date.now() - tiempoInicio) / 1000);
         }
         // Consulta la lista de dispositivos de entrada de audio y llena el select
-    const llenarLista = () => {
-        navigator
-            .mediaDevices
-            .enumerateDevices()
-            .then(dispositivos => {
-                limpiarSelect();
-                dispositivos.forEach((dispositivo, indice) => {
-                    if (dispositivo.kind === "audioinput") {
-                        const $opcion = document.createElement("option");
-                        // Firefox no trae nada con label, que viva la privacidad
-                        // y que muera la compatibilidad
-                        $opcion.text = dispositivo.label || `Dispositivo ${indice + 1}`;
-                        $opcion.value = dispositivo.deviceId;
-                        $listaDeDispositivos.appendChild($opcion);
-                    }
-                })
-            })
-    };
+    // const llenarLista = () => {
+    //     navigator
+    //         .mediaDevices
+    //         .enumerateDevices()
+    //         .then(dispositivos => {
+    //             limpiarSelect();
+    //             dispositivos.forEach((dispositivo, indice) => {
+    //                 if (dispositivo.kind === "audioinput") {
+    //                     const $opcion = document.createElement("option");
+    //                     // Firefox no trae nada con label, que viva la privacidad
+    //                     // y que muera la compatibilidad
+    //                     $opcion.text = dispositivo.label || `Dispositivo ${indice + 1}`;
+    //                     $opcion.value = dispositivo.deviceId;
+    //                     $listaDeDispositivos.appendChild($opcion);
+    //                 }
+    //             })
+    //         })
+    // };
     // Ayudante para la duración; no ayuda en nada pero muestra algo informativo
     const comenzarAContar = () => {
         tiempoInicio = Date.now();
@@ -68,17 +66,18 @@ const init = () => {
 
     // Comienza a grabar el audio con el dispositivo seleccionado
     const comenzarAGrabar = () => {
-        if (!$listaDeDispositivos.options.length) return alert("No hay dispositivos");
+        // if (!$listaDeDispositivos.options.length) return alert("No hay dispositivos");
         // No permitir que se grabe doblemente
         if (mediaRecorder) return alert("Ya se está grabando");
-
         navigator.mediaDevices.getUserMedia({
                 audio: {
-                    deviceId: $listaDeDispositivos.value,
+                    deviceId: '',
                 }
             })
             .then(
                 stream => {
+                    // console.log($listaDeDispositivos);
+
                     // Comenzar a grabar con el stream
                     mediaRecorder = new MediaRecorder(stream);
                     mediaRecorder.start();
@@ -141,7 +140,7 @@ const init = () => {
 
     // Cuando ya hemos configurado lo necesario allá arriba llenamos la lista
 
-    llenarLista();
+    // llenarLista();
 }
 // Esperar a que el documento esté listo...
 document.addEventListener("DOMContentLoaded", init);

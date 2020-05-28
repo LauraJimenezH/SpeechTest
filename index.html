@@ -2,43 +2,42 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Texto a voz con JS | Parzibyte.me</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Texto a voz con JS | Parzibyte.me</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-	<h1>Texto a voz con JS</h1>
-	<p>
-		<a href="//parzibyte.me/blog" target="_blank">By Parzibyte</a>
-	</p>
-	<label for="voces">Selecciona la voz:</label>
+    <h2>Grabacion Firma Electrónica</h2>
     <br>
-   <select id="voces">
-		</select>
-		<br>
-		<br>
-		Escribe tu mensaje:<br>
-		<textarea id="mensaje" cols="30" rows="5"></textarea>
-		<br><br>
-        <button id="btnEscuchar">Escuchar</button>
-        
-<div>
-    <h1>Grabar audio del micrófono con JavaScript</h1>
     <br>
-    <a href="//parzibyte.me/blog" target="_blank">By Parzibyte</a>
-    <div>
-        <select name="listaDeDispositivos" id="listaDeDispositivos"></select>
-        <br><br>
-        <p id="duracion"></p>
-        <br>
-        <button id="btnComenzarGrabacion">Comenzar</button>
-        <button id="btnDetenerGrabacion">Detener</button>
-        <input id="microLau" type="file" accept="audio/*" capture="microphone">
-
+    <h3>SPEECH DEL CONTRATO RESUMIDO</h3>
+    <div id="text-speech">
+        <strong>Términos y condiciones:</strong><br><br>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore, doloribus assumenda incidunt accusantium iure
+        et eaque! Aut molestias eveniet, aspernatur saepe veritatis consectetur labore dolores exercitationem maiores
+        recusandae omnis vero!
+        Iste culpa ab laboriosam sequi autem nostrum, qui pariatur quos alias ea commodi fugit veritatis! Dolorem,
+        repellat a error architecto aperiam praesentium. Nemo accusamus tempore culpa ut non laboriosam aliquam.
+        Perspiciatis odit, voluptatum distinctio amet rem aliquid voluptas temporibus earum vel iusto dolorem sapiente
+        minima voluptatibus adipisci dignissimos est aut possimus aspernatur incidunt laborum exercitationem minus
+        inventore! Minima, natus quisquam!
+        Esse porro harum architecto explicabo ut natus accusantium rerum. Aut voluptate distinctio laborum, facilis
+        obcaecati sint recusandae laudantium magni nihil iste at architecto eius illo officiis, sapiente a incidunt
+        quod.
     </div>
-</div>
-    <script  src="app.js"></script>
+    <br>
+
+    <div>
+        <div>
+            <p id="duracion"></p>
+            <button id="btnComenzarGrabacion">Grabar</button>
+            <button id="btnDetenerGrabacion">Detener</button>
+        </div>
+    </div>
+    <!-- <script src="app.js"></script> -->
     <script src="appSpeech.js"></script>
-  </body>
+</body>
+
 </html>
