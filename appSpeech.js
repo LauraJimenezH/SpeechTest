@@ -25,16 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .mediaDevices
           .enumerateDevices()
           .then(dispositivos => {
-              dispositivos.forEach((dispositivo, indice) => {
-                  if (dispositivo.kind === "audioinput") {
-                      // const $opcion = document.createElement("option");
-                      // Firefox no trae nada con label, que viva la privacidad
-                      // y que muera la compatibilidad
-                      // $opcion.text = dispositivo.label || `Dispositivo ${indice + 1}`;
-                      $dispositivo = dispositivo.deviceId;
-                      
-                  }
-              })
+            $dispositivo = dispositivos[2].deviceId;
           })
   };
 
