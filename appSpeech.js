@@ -19,7 +19,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // Amable aviso para que el mundo comience a usar navegadores decentes ;)
   if (typeof MediaRecorder === "undefined" || !tieneSoporteUserMedia())
     return alert("Tu navegador web no cumple los requisitos; por favor, actualiza a un navegador decente como Firefox o Google Chrome");
-
+    $dispositivo = '';
+    const llenarLista = () => {
+      navigator
+          .mediaDevices
+          .enumerateDevices()
+          .then(dispositivos => {
+              dispositivos.forEach((dispositivo, indice) => {
+                  if (dispositivo.kind === "audioinput") {
+                      // const $opcion = document.createElement("option");
+                      // Firefox no trae nada con label, que viva la privacidad
+                      // y que muera la compatibilidad
+                      // $opcion.text = dispositivo.label || `Dispositivo ${indice + 1}`;
+                      $dispositivo = dispositivo.deviceId;
+                      
+                  }
+              })
+          })
+  };
 
   // Declaración de elementos del DOM
     $duracion = document.querySelector("#duracion"),
@@ -57,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mediaRecorder) return alert("Ya se está grabando");
     navigator.mediaDevices.getUserMedia({
       audio: {
-        deviceId: '',
+        deviceId: $dispositivo,
       }
     })
       .then(
@@ -87,9 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
           var pendingSpeech = false;
           let mensaje = new SpeechSynthesisUtterance(textoSpeech);
           mensaje.lang = 'es-ES'
-          // mensaje.rate = 1;
+          mensaje.rate = 1;
           // mensaje.text = textoAEscuchar;
-          // mensaje.pitch = 1;
+          // mensaje.pitch = 2;
           sysnt.speak(mensaje);
           // Cuando se detenga (haciendo click en el botón) se ejecuta esto
           mediaRecorder.addEventListener("stop", () => {
@@ -150,6 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cuando ya hemos configurado lo necesario allá arriba llenamos la lista
 
-  // llenarLista();
+  llenarLista();
 });
 
